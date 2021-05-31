@@ -23,8 +23,10 @@
 - Speedtest with picture results
 - Limiting Torrent size support
 - Sudo with Database support
+- Multiple Trackers support
 - Check Heroku dynos stats
 - Custom image support
+- Counting file/folders
 - Racaty.net support
 - Shell and Executor
 - Stickers module
@@ -111,17 +113,17 @@ cp config_sample.env config.env
 _____REMOVE_THIS_LINE_____=True
 ```
 Fill up rest of the fields. Meaning of each fields are discussed below:
-### Required field
+### Required Field
 - **BOT_TOKEN**: The Telegram bot token that you get from [@BotFather](https://t.me/BotFather)
 - **TELEGRAM_API**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org DO NOT put this in quotes.
 - **TELEGRAM_HASH**: This is to authenticate to your Telegram account for downloading Telegram files. You can get this from https://my.telegram.org
 - **OWNER_ID**: The Telegram user ID (not username) of the Owner of the bot
-- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: If you deploying on Heroku, no need to generate database manually, because it will automatic generate database when first deploying)
+- **DATABASE_URL**: Your Database URL. See [Generate Database](https://github.com/breakdowns/slam-mirrorbot/tree/master#generate-database) to generate database. (**NOTE**: Leave this empty if You deploying on Heroku with PostgreSQL, for using another database with Heroku just make the name of the var (DATABASE_URL), for vps You must fill database url here)
 - **GDRIVE_FOLDER_ID**: This is the folder ID of the Google Drive Folder to which you want to upload all the mirrors.
 - **DOWNLOAD_DIR**: The path to the local folder where the downloads should be downloaded to
 - **DOWNLOAD_STATUS_UPDATE_INTERVAL**: A short interval of time in seconds after which the Mirror progress message is updated. (I recommend to keep it `5` seconds at least)  
 - **AUTO_DELETE_MESSAGE_DURATION**: Interval of time (in seconds), after which the bot deletes it's message (and command message) which is expected to be viewed instantly. (**Note**: Set to `-1` to never automatically delete messages)
-### Optional field
+### Optional Field
 - **AUTHORIZED_CHATS**: Fill user_id and chat_id of you want to authorize.
 - **IS_TEAM_DRIVE**: (Optional field) Set to `True` if `GDRIVE_FOLDER_ID` is from a Team Drive else `False` or Leave it empty.
 - **USE_SERVICE_ACCOUNTS**: (Optional field) (Leave empty if unsure) Whether to use Service Accounts or not. For this to work see [Using service accounts](https://github.com/breakdowns/slam-mirrorbot#generate-service-accounts-what-is-service-account) section below.
@@ -143,14 +145,22 @@ Fill up rest of the fields. Meaning of each fields are discussed below:
 ```
 exe.io, gplinks.in, shrinkme.io, urlshortx.com, shortzon.com
 ```
+
 Above are the supported url Shorteners. Except these only some url Shorteners are supported.
 
 **Note**: You can limit maximum concurrent downloads by changing the value of **MAX_CONCURRENT_DOWNLOADS** in aria.sh. By default, it's set to `7`.
+### Add more buttons (Optional)
+Two buttons are already added of File Link and Index Link, you can add extra buttons too, these are optional, if you don't know what are below entries, simply leave them, don't fill anything in them.
+- **BUTTON_THREE_NAME**:
+- **BUTTON_THREE_URL**:
+- **BUTTON_FOUR_NAME**:
+- **BUTTON_FOUR_URL**:
+- **BUTTON_FIVE_NAME**:
+- **BUTTON_FIVE_URL**:
 
 </details>
 
 ## Getting Google OAuth API credential file
-
 - Visit the [Google Cloud Console](https://console.developers.google.com/apis/credentials)
 - Go to the OAuth Consent tab, fill it, and save.
 - Go to the Credentials tab and click Create Credentials -> OAuth Client ID
